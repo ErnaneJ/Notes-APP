@@ -13,6 +13,10 @@ body {
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
 }
+#colors{
+    border:none;
+    border-radius: 50%;
+}
 .notes{
     display:flex;
     flex-wrap: wrap;
@@ -51,11 +55,11 @@ body {
 .note .tools{
     background-color: rgba(50, 50, 100, 0.3);
     display:flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 0.5rem;
     border-radius: 10px 10px 0px 0px;
 }
-.note .tools button{
+.note .tools button, .note .tools i{
     background-color: transparent;
     border:none;
     color:white;
