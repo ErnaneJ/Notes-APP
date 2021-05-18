@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+    transition: .3s;
+    margin:0;
+    padding:0;
+}
+
+body {
+    background-color: #537895;
+    background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+}
+.notes{
+    display:flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: calc(100vh - 41px);
+    padding-top: 3rem;
+}
+
+.add{
+    background-color: #22323f;
+    color:white;
+    padding: 0.5rem 1rem;
+    border:none;
+    border-radius:  3px;
+    position:fixed;
+    top:1rem;
+    cursor:pointer;
+    right: 1rem;
+}
+.add:hover{
+    transform: translateY(-5px);
+}
+.note {
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.5);
+    margin: 20px;
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
+
+    background-color: rgba(0,0,0,0.3);
+}
+.note:hover{
+    transform:translateY(-10px);
+}
+
+.note .tools{
+    background-color: rgba(50, 50, 100, 0.3);
+    display:flex;
+    justify-content: flex-end;
+    padding: 0.5rem;
+    border-radius: 10px 10px 0px 0px;
+}
+.note .tools button{
+    background-color: transparent;
+    border:none;
+    color:white;
+    cursor:pointer;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.note .main{
+    overflow: auto;
+    max-height: 360px;
+    background-color: transparent;
+    width: 100%;
+    border-radius: 0px 0px 10px 10px;
+    padding:10px;
+    color:white;
+}
+.note .main a{
+    color:#3EA6FF;
+}
+.note textarea{
+    color:white;
+    font-family: inherit;
+    font-size: 14px;
+    border:none;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    height: 365px;
+    resize: none;
+    border-radius: 0px 0px 10px 10px;
+    padding:10px;
+}
+
+
+.note .hidden{
+    display:none;
+}
+footer{
+    text-align: center;
+    width: 100%;
+    color:white;
+    opacity: .4;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+footer:hover{
+    opacity: .8;
+}
+footer a{
+    color:white;
+    text-decoration: none;
+    
+}
+footer a:hover{
+    text-decoration: underline; 
+}
