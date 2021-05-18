@@ -10,7 +10,7 @@
 <br>
 
 <p align="center">
-  <video style="border-radius:10px;" loop autoplay src="https://user-images.githubusercontent.com/64796733/118578934-722b0780-b763-11eb-839b-1c6bd4cf5998.mp4"></video>
+  <video style="border-radius:10px;" loop autoplay src="https://user-images.githubusercontent.com/64796733/118578934-722b0780-b763-11eb-839b-1c6bd4cf5998.mp4" & modestbranding = 1 & autohide = 1 & showinfo = 0 & controls = 0></video>
 </p>
 
 ## 🚀 Technologies
