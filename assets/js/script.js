@@ -37,11 +37,17 @@ function addNewNote(text = ''){
 
     note.innerHTML = `
             <div class="tools">
-                <label for="colors${c}">
-                    <i class="fa fa-palette" ></i>
-                    <input type="color" class ="color" id="colors${c}" style="opacity: 0; pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$">
-                </label>
-                <div>
+                <div class="left">
+                    <label for="colorBg${c}">
+                        <i title="Change background color." class="fa fa-palette" ></i>
+                        <input type="color" hidden class="colorBg" id="colorBg${c}" name="colorBg${c}" style="opacity: 0;" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$">
+                    </label>
+                    <label for="colorsLetter${c}">
+                        <i title="Change color letters." class="fas fa-tint"></i>
+                        <input type="color" hidden class="colorLetter" id="colorsLetter${c}" name="colorsLetter${c}" style="opacity: 0;" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$">
+                    </label>
+                </div>
+                <div class="rigth">
                     <button title="save/edit" class="edit"><i class="fas fa-edit"></i></button>
                     <button title ="delete" class="delete"><i class="fas fa-trash-alt"></i></button>
                 </div>
@@ -50,7 +56,8 @@ function addNewNote(text = ''){
             <textarea class="${text ? "hidden" : ""}"></textarea>
     `;
 
-    const colorBtn =  note.querySelector('.color')
+    const colorBgBtn =  note.querySelector('.colorBg')
+    const colorLetterBtn =  note.querySelector('.colorLetter')
     const editBtn = note.querySelector('.edit');
     const deleteBtn = note.querySelector('.delete');
 
@@ -79,26 +86,13 @@ function addNewNote(text = ''){
         updateLS();
     });
 
-    colorBtn.addEventListener('change',()=>{
-        note.style.backgroundColor = colorBtn.value;
+    colorBgBtn.addEventListener('change', ()=>{
+        note.style.backgroundColor = colorBgBtn.value;
+        updateLS();
+    });
 
-        let lum = 0;
-        if(colorBtn.value.replace(/[^0-9]/g,'').length == 0){
-            lum = 27;
-        }else{
-            for(let i = 0; i<colorBtn.value.replace(/[^0-9]/g,'').length; i++){
-                lum += parseInt(colorBtn.value.replace(/[^0-9]/g,'')[i]);
-            }
-        }
-        if(lum >= 17){
-            console.log('lum ta fuderoso')
-            note.querySelector('.main').style.color = 'rgba(0,0,0)';
-            note.querySelector('textarea').style.color ='rgba(0,0,0)';
-        }else{
-            console.log('lum ta baixo')
-            note.querySelector('.main').style.color = 'rgba(255,255,255)';
-            note.querySelector('textarea').style.color = 'rgba(255,255,255)';
-        }
+    colorLetterBtn.addEventListener('change', ()=>{
+        note.querySelector('.main').style.color = colorLetterBtn.value;
         updateLS();
     });
 
