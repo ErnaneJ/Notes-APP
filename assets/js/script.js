@@ -2,29 +2,13 @@ const addBtn = document.getElementById('add');
 
 const notes = JSON.parse(localStorage.getItem('notes'));
 let c = 0;
+console.log(notes)
 if(notes){
-    notes.content.forEach(note =>{
-        addNewNote(note);
-    });
-
-    notes.colors.forEach((color, index) => {
-        document.querySelectorAll('.note')[index].style.backgroundColor = color;
-        let lum = 0;
-        if(color.replace(/[^0-9]/g,'').length == 0){
-            lum = 27;
-        }else{
-            for(let i = 0; i<color.replace(/[^0-9]/g,'').length; i++){
-                lum += parseInt(color.replace(/[^0-9]/g,'')[i]);
-            }
-        }
-        if(lum >=17){
-            document.querySelectorAll('.main')[index].style.color = 'rgba(0,0,0)';
-            document.querySelectorAll('textarea')[index].style.color ='rgba(0,0,0)';
-        }else{
-            document.querySelectorAll('.main')[index].style.color = 'rgba(255,255,255)';
-            document.querySelectorAll('textarea')[index].style.color = 'rgba(255,255,255)';
-        }
-    });
+    notes.content.forEach(note => addNewNote(note));
+    notes.colorBg.forEach((color, index) => document.querySelectorAll('.note')[index].style.backgroundColor = color);
+    notes.colorLetter.forEach((color, index) => {
+        console.log(color)
+        document.querySelectorAll('.note .main')[index].style.color = color});
 }
 
 addBtn.addEventListener('click', ()=>{
@@ -102,20 +86,14 @@ function addNewNote(text = ''){
 
 function updateLS(){
     const notesText = document.querySelectorAll('textarea');
+    const notesMain = document.querySelectorAll('.note .main');
     const notesColor = document.querySelectorAll('.note');
 
-    const notes = {
-        content: [],
-        colors: []
-    };
-
-    notesText.forEach(note => {
-        notes.content.push(note.value);
-    });
-
-    notesColor.forEach(note => {
-        notes.colors.push(note.style.backgroundColor);
-    });
+    const notes = {content: [],colorBg: [],colorLetter: []};
+    
+    notesMain.forEach(main => notes.colorLetter.push(main.style.color))
+    notesText.forEach(text => notes.content.push(text.value ?? ""));
+    notesColor.forEach(note => notes.colorBg.push(note.style.backgroundColor));
 
     localStorage.setItem('notes', JSON.stringify(notes));
 }
