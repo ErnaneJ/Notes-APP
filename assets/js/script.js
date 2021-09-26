@@ -1,14 +1,25 @@
+let interval;
+const rgbToHex = color => {
+    const r = parseInt(color.split("(")[1].split(",")[0])
+    const g = parseInt(color.split("(")[1].split(",")[1])
+    const b = parseInt(color.split("(")[1].split(",")[2].split(")")[0])
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
 const addBtn = document.getElementById('add');
-
 const notes = JSON.parse(localStorage.getItem('notes'));
 let c = 0;
-console.log(notes)
 if(notes){
     notes.content.forEach(note => addNewNote(note));
-    notes.colorBg.forEach((color, index) => document.querySelectorAll('.note')[index].style.backgroundColor = color);
+    notes.colorBg.forEach((color, index) => {
+        document.querySelectorAll('.note')[index].style.backgroundColor = color;
+        document.querySelector(`#colorBg${index}`).value = rgbToHex(color);
+        console.log(rgbToHex(color))
+    });
     notes.colorLetter.forEach((color, index) => {
-        console.log(color)
-        document.querySelectorAll('.note .main')[index].style.color = color});
+        document.querySelectorAll('.note .main')[index].style.color = color;
+        document.querySelectorAll('.note textarea')[index].style.color = color;
+        document.querySelector(`#colorsLetter${index}`).value = rgbToHex(color);
+    });
 }
 
 addBtn.addEventListener('click', ()=>{
@@ -24,12 +35,14 @@ function addNewNote(text = ''){
                 <div class="left">
                     <label for="colorBg${c}">
                         <i title="Change background color." class="fa fa-palette" ></i>
-                        <input type="color" hidden class="colorBg" id="colorBg${c}" name="colorBg${c}" style="opacity: 0;" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$">
                     </label>
                     <label for="colorsLetter${c}">
                         <i title="Change color letters." class="fas fa-tint"></i>
-                        <input type="color" hidden class="colorLetter" id="colorsLetter${c}" name="colorsLetter${c}" style="opacity: 0;" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$">
                     </label>
+                    <div class="input-colors">
+                        <input type="color" class="colorBg" id="colorBg${c}" name="colorBg${c}" style="opacity: 0;pointer-events: none;" >
+                        <input type="color" class="colorLetter" id="colorsLetter${c}" name="colorsLetter${c}" style="opacity: 0;pointer-events: none;">
+                    </div>
                 </div>
                 <div class="rigth">
                     <button title="save/edit" class="edit"><i class="fas fa-edit"></i></button>
@@ -70,15 +83,17 @@ function addNewNote(text = ''){
         updateLS();
     });
 
-    colorBgBtn.addEventListener('change', ()=>{
-        note.style.backgroundColor = colorBgBtn.value;
-        updateLS();
-    });
+    colorBgBtn.addEventListener('focus', ()=>{interval = setInterval(()=>{
+        note.style.backgroundColor = colorBgBtn.value;updateLS();
+    }, 10);});
+    colorBgBtn.addEventListener('blur', () => clearInterval(interval));
 
-    colorLetterBtn.addEventListener('change', ()=>{
+    colorLetterBtn.addEventListener('focus', ()=>{interval = setInterval(()=>{
+        note.querySelector('textarea').style.color = colorLetterBtn.value;
         note.querySelector('.main').style.color = colorLetterBtn.value;
         updateLS();
-    });
+    }, 10);});
+    colorLetterBtn.addEventListener('blur', () => clearInterval(interval));
 
     document.querySelector('.notes').appendChild(note);
     c++;
