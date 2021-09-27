@@ -7,9 +7,12 @@ const rgbToHex = color => {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
 const addBtn = document.getElementById('add');
-const notes = JSON.parse(localStorage.getItem('notes'));
+let notes = JSON.parse(localStorage.getItem('notes'));
 let c = 0;
-if(notes){
+if(notes) loadNotes();
+
+function loadNotes(){
+    notes = JSON.parse(localStorage.getItem('notes'));
     notes.content.forEach(note => addNewNote(note));
     notes.colorBg.forEach((color, index) => {
         document.querySelectorAll('.note')[index].style.backgroundColor = color;
@@ -22,7 +25,6 @@ if(notes){
     });
     enableInputs();
 }
-
 addBtn.addEventListener('click', ()=>{
     addNewNote();
 });
@@ -99,7 +101,28 @@ function addNewNote(text = ''){
     document.querySelector('.notes').appendChild(note);
     c++;
 }
-function enableInputs(){document.querySelectorAll(`input[type="checkbox"]`).forEach(el => {el.removeAttribute('disabled')})}
+function enableInputs(){
+    document.querySelectorAll(`input[type="checkbox"]`).forEach((input, i) => {
+        input.removeAttribute('disabled');
+        input.id = "checkbox"+i ;
+        input.addEventListener('change', () => {
+            let liText = input.parentNode.innerText.toString();
+            const textArea = Array.from(document.querySelectorAll('textarea')).filter(ta => ta.value.includes(liText))[0];
+            let parent = input
+            let main = null;
+            while(main == null){
+                parent = parent.parentElement
+                if(parent.classList.contains('main')) main = parent;
+            }
+            if (input.checked) {
+                textArea.value = textArea.value.replace(`- [ ] ${liText.trim()}`, `- [x] ${liText.trim()}`) 
+            } else {
+                textArea.value = textArea.value.replace(`- [x] ${liText.trim()}`, `- [ ] ${liText.trim()}`) 
+            }
+            main.innerHTML = marked(textArea.value);
+                updateLS();
+        });
+    })}
 function updateLS(){
     enableInputs();
     const notesText = document.querySelectorAll('textarea');
