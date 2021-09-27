@@ -2,6 +2,29 @@
 
 * {box-sizing: border-box;margin:0;padding:0;}
 
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  
+    ::-webkit-scrollbar-track {
+    background:rgba(0,0,0,0.3); 
+  }
+  
+  /* Handle */
+  
+    ::-webkit-scrollbar-thumb {
+    background: #555; 
+    border-radius:20px;
+  }
+  
+    
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    cursor:pointer;
+  } 
 body {
     background-color: #537895;
     background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
@@ -32,9 +55,10 @@ body {
 .add:hover{ transform: translateY(-5px);}
 .note {
     box-shadow: 0 0 10px 4px rgba(0,0,0,.5);
-    margin: 20px;
+    margin: 5px 20px;
     height: 400px;
     width: 400px;
+    overflow: hidden;
     border-radius: 10px;
     transition: .3s;
     background-color: rgba(0,0,0,0.3);
@@ -70,6 +94,7 @@ body {
     padding:10px;
     color:white;
 }
+.note .main *{width:100%;word-wrap:break-word;}
 .note .main a{color:#3EA6FF;}
 .note textarea{
     color:white;
