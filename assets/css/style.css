@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
 * {box-sizing: border-box;margin:0;padding:0;}
-
+input[type="checkbox"]{width: 15px !important; }
   /* width */
   ::-webkit-scrollbar {
     width: 8px;

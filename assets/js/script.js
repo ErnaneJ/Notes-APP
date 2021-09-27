@@ -20,6 +20,7 @@ if(notes){
         document.querySelectorAll('.note textarea')[index].style.color = color;
         document.querySelector(`#colorsLetter${index}`).value = rgbToHex(color);
     });
+    enableInputs();
 }
 
 addBtn.addEventListener('click', ()=>{
@@ -98,8 +99,9 @@ function addNewNote(text = ''){
     document.querySelector('.notes').appendChild(note);
     c++;
 }
-
+function enableInputs(){document.querySelectorAll(`input[type="checkbox"]`).forEach(el => {el.removeAttribute('disabled')})}
 function updateLS(){
+    enableInputs();
     const notesText = document.querySelectorAll('textarea');
     const notesMain = document.querySelectorAll('.note .main');
     const notesColor = document.querySelectorAll('.note');
