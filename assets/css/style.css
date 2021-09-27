@@ -1,11 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
-* {
-    box-sizing: border-box;
-    transition: .3s;
-    margin:0;
-    padding:0;
-}
+* {box-sizing: border-box;margin:0;padding:0;}
 
 body {
     background-color: #537895;
@@ -13,10 +8,7 @@ body {
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
 }
-#colors{
-    border:none;
-    border-radius: 50%;
-}
+#colors{border:none;border-radius: 50%;}
 .notes{
     display:flex;
     flex-wrap: wrap;
@@ -35,22 +27,19 @@ body {
     top:1rem;
     cursor:pointer;
     right: 1rem;
+    transition: .3s;
 }
-.add:hover{
-    transform: translateY(-5px);
-}
+.add:hover{ transform: translateY(-5px);}
 .note {
     box-shadow: 0 0 10px 4px rgba(0,0,0,.5);
     margin: 20px;
     height: 400px;
     width: 400px;
     border-radius: 10px;
-
+    transition: .3s;
     background-color: rgba(0,0,0,0.3);
 }
-.note:hover{
-    transform:translateY(-10px);
-}
+.note:hover{transform:translateY(-10px);}
 
 .note .tools{
     background-color: rgba(50, 50, 100, 0.3);
@@ -81,9 +70,7 @@ body {
     padding:10px;
     color:white;
 }
-.note .main a{
-    color:#3EA6FF;
-}
+.note .main a{color:#3EA6FF;}
 .note textarea{
     color:white;
     font-family: inherit;
@@ -98,26 +85,16 @@ body {
     padding:10px;
 }
 
-
-.note .hidden{
-    display:none;
-}
+.note .hidden{display:none;}
 footer{
     text-align: center;
     width: 100%;
     color:white;
     opacity: .4;
+    transition: .3s;
     font-size: 14px;
     padding-bottom: 20px;
 }
-footer:hover{
-    opacity: .8;
-}
-footer a{
-    color:white;
-    text-decoration: none;
-    
-}
-footer a:hover{
-    text-decoration: underline; 
-}
+footer:hover{opacity: .8;}
+footer a{transition: .3s;color:white;text-decoration: none;}
+footer a:hover{text-decoration: underline; }
