@@ -1,5 +1,6 @@
 let interval;
 const rgbToHex = color => {
+    if(!color) return;
     const r = parseInt(color.split("(")[1].split(",")[0])
     const g = parseInt(color.split("(")[1].split(",")[1])
     const b = parseInt(color.split("(")[1].split(",")[2].split(")")[0])
@@ -13,7 +14,6 @@ if(notes){
     notes.colorBg.forEach((color, index) => {
         document.querySelectorAll('.note')[index].style.backgroundColor = color;
         document.querySelector(`#colorBg${index}`).value = rgbToHex(color);
-        console.log(rgbToHex(color))
     });
     notes.colorLetter.forEach((color, index) => {
         document.querySelectorAll('.note .main')[index].style.color = color;
