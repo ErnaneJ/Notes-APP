@@ -1,3 +1,4 @@
+document.addEventListener('keydown', e => {if(e.key === 's' && e.ctrlKey)e.preventDefault()});
 let interval;
 const rgbToHex = color => {
     if(!color) return;
@@ -77,6 +78,15 @@ function addNewNote(text = ''){
         main.classList.toggle('hidden');
         textArea.classList.toggle('hidden');
         textArea.focus();
+    });
+
+    textArea.addEventListener('keydown', e => {
+        if(e.key === 's' && e.ctrlKey){
+            e.preventDefault();
+            main.classList.toggle('hidden');
+            textArea.classList.toggle('hidden');
+            textArea.focus();
+        }
     });
 
     deleteBtn.addEventListener('click', () => {
