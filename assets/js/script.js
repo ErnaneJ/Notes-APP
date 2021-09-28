@@ -96,24 +96,18 @@ function addNewNote(text = ''){
 
     textArea.addEventListener('input', e =>{
         const {value} = e.target;
-
         main.innerHTML = marked(value);
-
         updateLS();
     });
 
-    colorBgBtn.addEventListener('focus', ()=>{interval = setInterval(()=>{
+    colorBgBtn.addEventListener('input', ()=>{
         note.style.backgroundColor = colorBgBtn.value;updateLS();
-    }, 10);});
-    colorBgBtn.addEventListener('blur', () => clearInterval(interval));
-
-    colorLetterBtn.addEventListener('focus', ()=>{interval = setInterval(()=>{
+    });
+    colorLetterBtn.addEventListener('input', ()=>{
         note.querySelector('textarea').style.color = colorLetterBtn.value;
         note.querySelector('.main').style.color = colorLetterBtn.value;
         updateLS();
-    }, 10);});
-    colorLetterBtn.addEventListener('blur', () => clearInterval(interval));
-
+    });
     document.querySelector('.notes').appendChild(note);
     c++;
 }
