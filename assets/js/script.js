@@ -1,5 +1,5 @@
 document.addEventListener('keydown', e => {if(e.key === 's' && e.ctrlKey)e.preventDefault()});
-let interval;
+
 const rgbToHex = color => {
     if(!color) return;
     const r = parseInt(color.split("(")[1].split(",")[0])
