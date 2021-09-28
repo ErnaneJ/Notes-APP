@@ -106,8 +106,8 @@ function enableInputs(){
         input.removeAttribute('disabled');
         input.id = "checkbox"+i ;
         input.addEventListener('change', () => {
-            let liText = input.parentNode.innerText.toString();
-            const textArea = Array.from(document.querySelectorAll('textarea')).filter(ta => ta.value.includes(liText))[0];
+            let liText = clearEntry(input.parentNode.innerHTML.toString().replace(/(\<input).+(\"\>)/, ""));
+            const textArea = Array.from(document.querySelectorAll('textarea')).filter(ta => ta.value.includes(liText.trim()))[0];
             let parent = input
             let main = null;
             while(main == null){
@@ -115,14 +115,22 @@ function enableInputs(){
                 if(parent.classList.contains('main')) main = parent;
             }
             if (input.checked) {
-                textArea.value = textArea.value.replace(`- [ ] ${liText.trim()}`, `- [x] ${liText.trim()}`) 
+                console.log(textArea)
+                textArea.value = textArea.value.replace(`- [ ] ${liText.trim()}`, `- [x] ~~${liText.trim()}~~`) 
             } else {
-                textArea.value = textArea.value.replace(`- [x] ${liText.trim()}`, `- [ ] ${liText.trim()}`) 
+                console.log(`- [x] ~~${liText.trim()}~~`)
+                textArea.value = textArea.value.replace(`- [x] ${liText.trim()}`, `- [ ] ${liText.trim().replace(/\~\~/g,"")}`) 
             }
             main.innerHTML = marked(textArea.value);
-                updateLS();
+            updateLS();
         });
     })}
+function clearEntry(txt){
+    return (
+        txt.replace(/(\<code\>)|(\<\/code\>)/g, "`")
+        .replace(/(\<del\>)|(\<\/del\>)/g, "~~")
+    );
+}
 function updateLS(){
     enableInputs();
     const notesText = document.querySelectorAll('textarea');
