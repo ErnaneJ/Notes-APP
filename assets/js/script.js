@@ -73,6 +73,12 @@ function addNewNote(text = ''){
         textArea.focus();
     });
 
+    main.addEventListener('dblclick', function (e) {
+        main.classList.toggle('hidden');
+        textArea.classList.toggle('hidden');
+        textArea.focus();
+    });
+
     deleteBtn.addEventListener('click', () => {
         note.remove();
         updateLS();
@@ -115,10 +121,8 @@ function enableInputs(){
                 if(parent.classList.contains('main')) main = parent;
             }
             if (input.checked) {
-                console.log(textArea)
                 textArea.value = textArea.value.replace(`- [ ] ${liText.trim()}`, `- [x] ~~${liText.trim()}~~`) 
             } else {
-                console.log(`- [x] ~~${liText.trim()}~~`)
                 textArea.value = textArea.value.replace(`- [x] ${liText.trim()}`, `- [ ] ${liText.trim().replace(/\~\~/g,"")}`) 
             }
             main.innerHTML = marked(textArea.value);
